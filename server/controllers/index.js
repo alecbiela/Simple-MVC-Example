@@ -282,7 +282,11 @@ const updateLastDog = (req, res) => {
   const savePromise = lastAddedDog.save();
 
   // send back the name as a success for now
-  savePromise.then(() => res.json({ name: lastAddedDog.name, beds: lastAddedDog.bedsOwned }));
+  savePromise.then(() => res.json({
+    name: lastAddedDog.name,
+    breed: lastAddedDog.breed,
+    age: lastAddedDog.age,
+  }));
 
   // if save error, just return an error for now
   savePromise.catch(err => res.json({ err }));
@@ -306,13 +310,7 @@ const searchNameDog = (req, res) => {
       return res.json({ error: 'No dogs found' });
     }
 
-    const doggo = new Dog({
-      name: doc.name,
-      breed: doc.breed,
-      age: doc.age + 1,
-    });
-    
-    lastAddedDog = doggo;
+    lastAddedDog = doc;
 
     return updateLastDog(req, res);
   });
