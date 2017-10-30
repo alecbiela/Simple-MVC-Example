@@ -306,11 +306,13 @@ const searchNameDog = (req, res) => {
       return res.json({ error: 'No dogs found' });
     }
 
-    lastAddedDog = {
+    const doggo = new Dog({
       name: doc.name,
       breed: doc.breed,
-      age: doc.age,
-    };
+      age: doc.age + 1,
+    });
+    
+    lastUpdatedDog = doggo;
 
     return updateLastDog(req, res);
   });
