@@ -312,7 +312,7 @@ const searchNameDog = (req, res) => {
       age: doc.age + 1,
     });
     
-    lastUpdatedDog = doggo;
+    lastAddedDog = doggo;
 
     return updateLastDog(req, res);
   });
